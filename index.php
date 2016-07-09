@@ -35,7 +35,7 @@ if (defined('ENVIRONMENT'))
 
 //本地根目录
 define('BASE_PATH',dirname(__FILE__).'/');
-
+//define('BASE_PATH','/opt/lampp/htdocs/static/');
 define('BASE_URL', rtrim(STATIC_URL,'/').'/');
 
 //自动判断环境

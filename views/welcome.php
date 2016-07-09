@@ -88,21 +88,30 @@ h1.page-header{
   </head> 
   <body> 
     <div id="body"> 
-        <h1 class="page-header">Layer CDN</h1> 
+        <h1 class="page-header">LayerLocal  CDN</h1> 
         <div id="content"> 
-            <blockquote>Layer CDN已经成功安装！</blockquote>
+            <blockquote>LayerLocal CDN 已经成功安装！</blockquote>
             <div class="unit"> 
-                <h2>关于Layer</h2> 
+                <h2>关于LayerLocal</h2> 
                 <div class="description"> 
-                    <p>Layer是一个基于PHP的轻巧的CDN程序，你可以利用Layer快速地为你的博客或者网站搭建自己的CDN，从而加速网站的加载，提升用户体验。Layer由SaeLayerCDN修改而来。</p> 
+                    <p>LayerLocal是一个基于PHP的轻巧的CDN程序，你可以利用LayerLocal快速地为你的博客或者网站搭建自己的CDN，从而加速网站的加载，提升用户体验。</p> 
+                    <p>Layer由SaeLayerCDN修改而来。</p> 
+                    <p>LayerLocal由LayerCDN修改而来。</p> 
                     <p>相比SaeLayerCDN，新版Layer的优势在于：</p> 
                     <ul> 
                         <li>基于SAE/BAE以及本地可写PHP环境，程序免费开源。</li>
-        				<li>可扩展性高，可轻易移植到任何云平台。</li>
+        				        <li>可扩展性高，可轻易移植到任何云平台。</li>
                         <li>防盗链保护，更省流量。</li>
                         <li>URL刷新缓存，轻松维护。</li>
                         <li>自定义HTTP Host、自定义缓存后缀，极端特殊情况也能轻松使用，方便进行全站CDN。</li> 
                         <li>内存缓存，更高效，更易管理。（开发中）</li> 
+                    </ul> 
+                     <p>相比LayerCDN，新版LayerLocal的优势在于：</p> 
+                    <ul> 
+                        <li>修正本地PHP环境读写Bug，程序继续免费开源。</li>
+        				        <li>本地PHP环境支持带问号的静态文件。</li>
+        				        <li>本地PHP环境增加四种mime type。</li>
+                        <li>本地PHP环境支持url跳转和read读取两种方式。</li>
                     </ul> 
                 </div> 
             </div> 
@@ -151,6 +160,13 @@ highlight_string($code);
                     <p>Layer还在完善中，项目的Github地址是：<a href="https://github.com/oott123/Layer">https://github.com/oott123/Layer</a>，欢迎fork和贡献代码。</p> 
                     <p>SaeLayerCDN的作者的博客是：<a href="http://blog.creatist.cn/">http://blog.creatist.cn/</a></p> 
                     <p><a href="http://sae.sina.com.cn/"><img src="http://static.sae.sina.com.cn/image/poweredby/120X33_transparent.gif" width="120" height="33" /></a></p> 
+                </div>
+                <h2>LayerLocalCDN说明</h2>
+                <div class="description">
+                    <p>LayerLocalCDN只专注于本地PHP加速的方式，项目的Github地址是：<a href="https://github.com/yehaicao/LayerLocalCDN">https://github.com/yehaicao/LayerLocalCDN</a>，欢迎fork和贡献代码。</p> 
+                    <p>如果你有其他建议和问题，可以访问LayerLocalCDN的支持网站是：<a href="http://www.wordpressleaf.com/">http://www.wordpressleaf.com/</a></p> 
+                    <p>注意：LayerLocal只检测并修正了本地目录+文件的加速方式。本地MD5文件方式未进行测试，如果有问题请前来反馈。</p> 
+                    <p><a href="http://www.wordpressleaf.com/"><img src="http://www.wordpressleaf.com/logo.png" width="248" height="79" /></a></p> 
                 </div> 
             </div> 
         </div> 

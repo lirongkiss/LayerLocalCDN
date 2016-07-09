@@ -21,6 +21,8 @@ class controller{
 		$request = ltrim($request,'/');
 		$ext = 'cache';
 		
+    $request = strpos($request,'?') ?  substr($request,0,strpos($request,'?')) : $request ;
+		
 		//检测环境
 		if(!RUN_ENV){
 			$this->error_type = 'no_run_env';
@@ -219,17 +221,82 @@ class controller{
 					'xul' => 'application/vnd.mozilla.xul+xml',
 					'xwd' => 'image/x-xwindowdump',
 					'xyz' => 'chemical/x-xyz',
-					'zip' => 'application/zip'
+					'zip' => 'application/zip',
+					'eot' => 'application/vnd.ms-fontobject',
+					'ttf' => 'font/ttf',
+					'otf' => 'font/ttf',
+					'woff' => 'application/x-font-woff',
+					'woff2' => 'application/font-woff2',
 				);
 				$basename = basename($request);
+        /*
+          basename(）
+          获取文件名部分
+          $path = "/testweb/home.php";
+
+          //显示带有文件扩展名的文件名
+           echo basename($path);
+
+
+
+          //显示不带有文件扩展名的文件名
+          echo basename($path,".php");
+          
+          输出结果
+          home.php
+          home
+
+*/
+				
 				$ext = strtolower(substr($basename,strrpos($basename,'.')+1));
-				if(isset($mime_types[$ext])){
-					$this->content_type=$mime_types[$ext];
+				
+				
+				//解决有带问号的扩展名导致文件类型错误的问题，查找问号第一次出现的位置。
+				
+				
+				
+				
+				$ext_qm = strpos($ext,'?') ?  substr($ext,0,strpos($ext,'?')) : $ext ;
+
+				
+				
+				/*				
+				//获取扩展名，
+				strrpos()
+				在文件名中找到 "." 的位置，将位置加1，往后挪动一位。
+        substr()
+        截取位置之后的字符
+        strtolower(）
+        将字符转换为小写。
+				
+				
+				
+				*/
+				
+				
+				
+				if(isset($mime_types[$ext_qm])){
+					$this->content_type=$mime_types[$ext_qm];
 				}
+				/*
+				利用扩展名变量
+				
+				从开始定义的文件类型中，为$this->content_type赋值
+				
+				*/
+				
+				
 				$direct = false;
+				
+				
 				if(in_array($ext,explode('|',strtolower(DIRECT_EXT)))){
 					$direct = true;
 				}
+				/*
+				判断$ext扩展名是否在开始定义的不缓存的类型中。
+				
+				*/
+				
 			}
 		}
 		
@@ -239,7 +306,7 @@ class controller{
 			$delete = true;
 			$request = $purge[1];
 		}
-		$key = (NO_KEY)?$request:md5($request).'_'.strlen($request).'.'.$ext;
+		$key = (NO_KEY) ? $request:md5($request).'_'.strlen($request).'.'.$ext;
 		$this->hit = false;
 		$this->handle($request,$key,$delete,$direct);
 		

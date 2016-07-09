@@ -13,6 +13,8 @@ function includeloader($class){
 spl_autoload_register('includeloader');
 //die($_SERVER['QUERY_STRING']);
 new controller(isset($_SERVER['REQUEST_URI'])?$_SERVER['REQUEST_URI']:'');
+//获取url，然后传给controller.php
+
 //print_r($_SERVER);die();
 //$url = $_SERVER['DOCUMENT_ROOT'].(isset($_SERVER['REQUEST_URI'])?$_SERVER['REQUEST_URI']:'');
 //$url = str_ireplace('\\','/',$url);
