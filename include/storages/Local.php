@@ -42,7 +42,7 @@ class StorageHandle{
 			
 			return $this->data_dir.$key;   //如果是url跳转方式，那么返回带路径文件名。
 			//应该是空间的绝对路径加上缓存路径
-			///opt/lampp/htdocs/static/leaf/  加上  wp-content/themes/wordpressleaf/style.css
+			//   /leaf/  加上  wp-content/themes/wordpressleaf/style.css
 
 		}
 		$letter1 = substr($key,0,1);
