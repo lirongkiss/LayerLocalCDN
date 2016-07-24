@@ -22,7 +22,9 @@ class controller{
 		$ext = 'cache';
 		
     $request = strpos($request,'?') ?  substr($request,0,strpos($request,'?')) : $request ;
-		
+    
+
+
 		//检测环境
 		if(!RUN_ENV){
 			$this->error_type = 'no_run_env';
@@ -260,7 +262,7 @@ class controller{
 
 				
 				
-				/*				
+				/*
 				//获取扩展名，
 				strrpos()
 				在文件名中找到 "." 的位置，将位置加1，往后挪动一位。
@@ -306,6 +308,10 @@ class controller{
 			$delete = true;
 			$request = $purge[1];
 		}
+		//调用函数，检查是不是指定的缓存目录
+		
+		$this->cdn_dir($request);
+		
 		$key = (NO_KEY) ? $request:md5($request).'_'.strlen($request).'.'.$ext;
 		$this->hit = false;
 		$this->handle($request,$key,$delete,$direct);
@@ -391,5 +397,68 @@ class controller{
 		echo json_encode(array('error'=>$this->error_type));
 	}
 	
+
+	private function cdn_dir($request){
+		
+		/******目录检测开始  ********/
+
+//判断请求的URL是不是规定的目录
+
+
+
+//将状态设为0
+
+    $cdn_dirs_staus=0;
+
+    //查找是否存在'/'，有则意味这有目录，进入缓存目录判断，如果没有，则意味着是根目录下的，可以直接缓存。
+
+    if ( stripos($request,'/') ) {
+
+
+
+       if (CDN_DIR){ //判断是否有预设的缓存目录
+       	
+       	   //先将可以缓存的目录解析为数组
+
+           $cdn_dirs=explode('|',strtolower(CDN_DIR));
+           
+           //查找请求的URL是否在预设的缓存目录里面
+
+           foreach ($cdn_dirs as &$dirvalue) {
+
+              if (stripos($request,$dirvalue.'/') === 0){
+
+                  $cdn_dirs_staus=1; //找到就将状态赋值为1，并且跳出本次循环。
+                  break;
+
+              }
+
+           }
+           unset($dirvalue);//销毁目录的值
+
+       }else{
+         //判断是否有预设的缓存目录，如果没有直接状态改为1；
+           $cdn_dirs_staus = 1;
+       }
+
+
+    }else{  //判断是否有斜杠，没有斜杠意味着是一个根目录的文件。
+
+       $cdn_dirs_staus = 1;
+
+    }
+    //如果状态为0，那么意味着不符合缓存目录的条件，缓存终止。
+    if ($cdn_dirs_staus === 0){ 
+    	exit(0); 
+    	}else{
+    	return 0;
+    	
+    	}
+
+
+/******目录检测结束  ********/
+
+	}
+
 	
 }
